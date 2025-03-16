@@ -103,34 +103,7 @@ const Navbar = () => {
             >
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-between">
-                        {/* Logo with animation */}
-                        {/* <Link href="/" className="flex items-center space-x-2 group">
-                            <motion.div
-                                className="relative h-8 w-8"
-                                whileHover={{ rotate: 12, scale: 1.05 }}
-                                transition={{ type: "spring", stiffness: 400 }}
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-br from-violet-600 to-indigo-400 rounded-full transform group-hover:rotate-12 transition-transform duration-300"></div>
-                                <div className="absolute inset-1 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
-                                    <motion.span
-                                        className="text-violet-600 dark:text-violet-500 font-bold text-xs"
-                                        animate={{
-                                            scale: [1, 1.1, 1],
-                                        }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: Infinity,
-                                            repeatType: "reverse"
-                                        }}
-                                    >
-                                        ₿
-                                    </motion.span>
-                                </div>
-                            </motion.div>
-                            <span className="font-bold text-xl bg-gradient-to-r from-violet-600 to-indigo-400 bg-clip-text text-transparent">
-                                BitPay<span className="text-black dark:text-white">ICP</span>
-                            </span>
-                        </Link> */}
+
                         <Link href="/" className="flex items-center space-x-2 group">
                             <motion.div
                                 className="relative h-8 w-8"
@@ -272,14 +245,30 @@ const Navbar = () => {
                             <div className="overflow-y-auto h-full py-6 px-6">
                                 {/* Mobile Header */}
                                 <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
-                                    <Link href="/" className="flex items-center space-x-2" onClick={toggleMobileMenu}>
-                                        <div className="relative h-8 w-8">
-                                            <div className="absolute inset-0 bg-gradient-to-br from-violet-600 to-indigo-400 rounded-full"></div>
+                                    <Link href="/" className="flex items-center space-x-2 group">
+                                        <motion.div
+                                            className="relative h-8 w-8"
+                                            whileHover={{ rotate: 12, scale: 1.05 }}
+                                            transition={{ type: "spring", stiffness: 400 }}
+                                        >
+                                            <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-yellow-400 rounded-full transform group-hover:rotate-12 transition-transform duration-300"></div>
                                             <div className="absolute inset-1 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
-                                                <span className="text-violet-600 dark:text-violet-500 font-bold text-xs">₿</span>
+                                                <motion.span
+                                                    className="text-orange-500 font-bold text-xs"
+                                                    animate={{
+                                                        scale: [1, 1.1, 1],
+                                                    }}
+                                                    transition={{
+                                                        duration: 2,
+                                                        repeat: Infinity,
+                                                        repeatType: "reverse"
+                                                    }}
+                                                >
+                                                    ₿
+                                                </motion.span>
                                             </div>
-                                        </div>
-                                        <span className="font-bold text-xl bg-gradient-to-r from-violet-600 to-indigo-400 bg-clip-text text-transparent">
+                                        </motion.div>
+                                        <span className="font-bold text-xl bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">
                                             BitPay<span className="text-black dark:text-white">ICP</span>
                                         </span>
                                     </Link>
