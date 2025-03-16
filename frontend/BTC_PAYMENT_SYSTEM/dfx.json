@@ -1,0 +1,23 @@
+{
+  "canisters": {
+    "BTC_PAYMENT_SYSTEM_backend": {
+      "main": "src/BTC_PAYMENT_SYSTEM_backend/main.mo",
+      "type": "motoko"
+    },
+    "BTC_PAYMENT_SYSTEM_frontend": {
+      "dependencies": ["BTC_PAYMENT_SYSTEM_backend"],
+      "frontend": {
+        "entrypoint": "src/BTC_PAYMENT_SYSTEM_frontend/index.html"
+      },
+      "source": ["src/BTC_PAYMENT_SYSTEM_frontend", "dist/BTC_PAYMENT_SYSTEM_frontend/assets"],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "version": 1
+}

@@ -58,6 +58,9 @@ This project introduces a revolutionary Bitcoin Payment System leveraging the In
 - Bitcoin Testnet Wallet
 - Stable internet connection
 
+## Contract deployed on the ICP mainnet
+ BTC_PAYMENT_SYSTEM_backend: https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io/?id=lvnop-tyaaa-aaaah-qp7rq-cai
+
 ## Installation
 
 ### 1. Clone the Repository
