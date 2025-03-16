@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Bitcoin, Download, Filter, Search } from "lucide-react";
+import ThemeToggle from "@/components/Themes/ThemeToggle";
 
 export default function TransactionsPage() {
     // This would normally come from your data source
@@ -34,6 +35,7 @@ export default function TransactionsPage() {
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Transactions</h2>
                 <div className="flex items-center space-x-2">
+                    <ThemeToggle />
                     <Button variant="outline" size="sm">
                         <Filter className="mr-2 h-4 w-4" />
                         Filter
@@ -116,7 +118,7 @@ export default function TransactionsPage() {
                                                 <td className="p-3 text-sm">
                                                     <div className="flex items-center">
                                                         <div className={`w-2 h-2 rounded-full mr-2 ${tx.type === 'payment' ? 'bg-green-500' :
-                                                                tx.type === 'refund' ? 'bg-orange-500' : 'bg-blue-500'
+                                                            tx.type === 'refund' ? 'bg-orange-500' : 'bg-blue-500'
                                                             }`}></div>
                                                         <span className="capitalize">{tx.type}</span>
                                                     </div>
@@ -130,12 +132,12 @@ export default function TransactionsPage() {
                                                 </td>
                                                 <td className="p-3 text-sm">
                                                     <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${tx.status === 'completed' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
-                                                            tx.status === 'pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
-                                                                'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
+                                                        tx.status === 'pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' :
+                                                            'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'
                                                         }`}>
                                                         <span className={`mr-1 h-1.5 w-1.5 rounded-full ${tx.status === 'completed' ? 'bg-green-600 dark:bg-green-400' :
-                                                                tx.status === 'pending' ? 'bg-yellow-600 dark:bg-yellow-400' :
-                                                                    'bg-red-600 dark:bg-red-400'
+                                                            tx.status === 'pending' ? 'bg-yellow-600 dark:bg-yellow-400' :
+                                                                'bg-red-600 dark:bg-red-400'
                                                             }`}></span>
                                                         <span className="capitalize">{tx.status}</span>
                                                     </span>

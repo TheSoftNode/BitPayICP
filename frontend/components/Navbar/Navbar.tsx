@@ -5,7 +5,18 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "../Themes/ThemeToggle";
+import WalletConnectButton from "../Wallet/WalletConnectButton";
 import { Menu, X, ChevronDown, Bitcoin, Shield, Zap, BarChart } from "lucide-react";
+import {
+    IdentityKitProvider,
+} from "@nfid/identitykit/react";
+import {
+    NFIDW,
+    Plug,
+    InternetIdentity,
+    Stoic,
+    OISY
+} from "@nfid/identitykit";
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -53,6 +64,18 @@ const Navbar = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
+    const handleConnectSuccess = () => {
+        console.log("Wallet connected successfully");
+    };
+
+    const handleConnectFailure = (error: any) => {
+        console.error("Wallet connection failed:", error);
+    };
+
+    const handleDisconnect = () => {
+        console.log("Wallet disconnected");
+    };
+
     if (!mounted) return null;
 
     const navLinks = [
@@ -62,8 +85,16 @@ const Navbar = () => {
         { href: "#stats", label: "Analytics", icon: <BarChart className="w-4 h-4 mr-2" /> }
     ];
 
+    // Supported wallets in preferred order
+    const supportedWallets = [NFIDW, Plug, InternetIdentity, Stoic, OISY];
+
     return (
-        <>
+        <IdentityKitProvider
+            signers={supportedWallets}
+            onConnectSuccess={handleConnectSuccess}
+            onConnectFailure={handleConnectFailure}
+            onDisconnect={handleDisconnect}
+        >
             <nav
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
                     ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md py-3"
@@ -73,6 +104,33 @@ const Navbar = () => {
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-between">
                         {/* Logo with animation */}
+                        {/* <Link href="/" className="flex items-center space-x-2 group">
+                            <motion.div
+                                className="relative h-8 w-8"
+                                whileHover={{ rotate: 12, scale: 1.05 }}
+                                transition={{ type: "spring", stiffness: 400 }}
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-br from-violet-600 to-indigo-400 rounded-full transform group-hover:rotate-12 transition-transform duration-300"></div>
+                                <div className="absolute inset-1 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
+                                    <motion.span
+                                        className="text-violet-600 dark:text-violet-500 font-bold text-xs"
+                                        animate={{
+                                            scale: [1, 1.1, 1],
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            repeatType: "reverse"
+                                        }}
+                                    >
+                                        ₿
+                                    </motion.span>
+                                </div>
+                            </motion.div>
+                            <span className="font-bold text-xl bg-gradient-to-r from-violet-600 to-indigo-400 bg-clip-text text-transparent">
+                                BitPay<span className="text-black dark:text-white">ICP</span>
+                            </span>
+                        </Link> */}
                         <Link href="/" className="flex items-center space-x-2 group">
                             <motion.div
                                 className="relative h-8 w-8"
@@ -112,33 +170,44 @@ const Navbar = () => {
                                 >
                                     <Link
                                         href={link.href}
-                                        className="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors flex items-center py-2"
+                                        className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors flex items-center py-2"
                                     >
                                         <span className="relative overflow-hidden group">
                                             {link.label}
-                                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 group-hover:w-full transition-all duration-300"></span>
+                                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-600 to-orange-400 group-hover:w-full transition-all duration-300"></span>
                                         </span>
                                     </Link>
                                 </motion.div>
                             ))}
+
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.4 }}
+                                transition={{ delay: 0.5 }}
                             >
                                 <Link href="/dashboard">
                                     <Button
-                                        className="bg-gradient-to-r from-orange-500 to-yellow-400 hover:from-orange-600 hover:to-yellow-500 text-white shadow-md hover:shadow-lg transition-shadow"
+                                        className="bg-gradient-to-r from-violet-600 to-indigo-400 hover:from-violet-700 hover:to-indigo-500 text-white shadow-md hover:shadow-lg transition-shadow"
                                         size="sm"
                                     >
                                         Dashboard
                                     </Button>
                                 </Link>
                             </motion.div>
+
+                            {/* Wallet Connect Button - Desktop Version */}
+                            <div className="hidden md:block">
+                                <WalletConnectButton isMobile={false} />
+                            </div>
                         </div>
 
                         {/* Theme Toggle and Mobile Menu */}
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-2">
+                            {/* Wallet Connect Button for mobile - Compact Version */}
+                            <div className="md:hidden">
+                                <WalletConnectButton isMobile={true} />
+                            </div>
+
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
@@ -152,7 +221,7 @@ const Navbar = () => {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.6 }}
-                                className="md:hidden"
+                                className="md:hidden block"
                             >
                                 <Button
                                     variant="ghost"
@@ -162,9 +231,9 @@ const Navbar = () => {
                                     onClick={toggleMobileMenu}
                                 >
                                     {isMobileMenuOpen ? (
-                                        <X className="w-6 h-6" />
+                                        <X className="w-5 h-5" />
                                     ) : (
-                                        <Menu className="w-6 h-6" />
+                                        <Menu className="w-5 h-5" />
                                     )}
                                 </Button>
                             </motion.div>
@@ -177,7 +246,7 @@ const Navbar = () => {
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        className="fixed inset-0 z-60 md:hidden"
+                        className="fixed inset-0 z-[100] md:hidden"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -205,12 +274,12 @@ const Navbar = () => {
                                 <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
                                     <Link href="/" className="flex items-center space-x-2" onClick={toggleMobileMenu}>
                                         <div className="relative h-8 w-8">
-                                            <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-yellow-400 rounded-full"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-br from-violet-600 to-indigo-400 rounded-full"></div>
                                             <div className="absolute inset-1 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
-                                                <span className="text-orange-500 font-bold text-xs">₿</span>
+                                                <span className="text-violet-600 dark:text-violet-500 font-bold text-xs">₿</span>
                                             </div>
                                         </div>
-                                        <span className="font-bold text-xl bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">
+                                        <span className="font-bold text-xl bg-gradient-to-r from-violet-600 to-indigo-400 bg-clip-text text-transparent">
                                             BitPay<span className="text-black dark:text-white">ICP</span>
                                         </span>
                                     </Link>
@@ -229,7 +298,7 @@ const Navbar = () => {
                                 <div className="space-y-6">
                                     <div className="space-y-3">
                                         <h3 className="font-semibold text-gray-900 dark:text-white text-sm flex items-center">
-                                            <span className="inline-block w-6 h-0.5 bg-orange-500 mr-2"></span>
+                                            <span className="inline-block w-6 h-0.5 bg-violet-500 mr-2"></span>
                                             Main Navigation
                                         </h3>
                                         <div className="space-y-1 pl-2">
@@ -242,7 +311,7 @@ const Navbar = () => {
                                                 >
                                                     <Link
                                                         href={link.href}
-                                                        className="flex items-center py-3 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-orange-500 dark:hover:text-orange-400 transition-colors group"
+                                                        className="flex items-center py-3 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-violet-600 dark:hover:text-violet-400 transition-colors group"
                                                         onClick={toggleMobileMenu}
                                                     >
                                                         {link.icon}
@@ -264,7 +333,7 @@ const Navbar = () => {
                                     {/* Secondary Links */}
                                     <div className="space-y-3">
                                         <h3 className="font-semibold text-gray-900 dark:text-white text-sm flex items-center">
-                                            <span className="inline-block w-6 h-0.5 bg-orange-500 mr-2"></span>
+                                            <span className="inline-block w-6 h-0.5 bg-violet-500 mr-2"></span>
                                             Resources
                                         </h3>
                                         <div className="space-y-1 pl-2">
@@ -281,7 +350,7 @@ const Navbar = () => {
                                                 >
                                                     <Link
                                                         href={link.href}
-                                                        className="flex items-center py-2 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-orange-500 dark:hover:text-orange-400 transition-colors text-sm"
+                                                        className="flex items-center py-2 px-4 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-violet-600 dark:hover:text-violet-400 transition-colors text-sm"
                                                         onClick={toggleMobileMenu}
                                                     >
                                                         {link.label}
@@ -291,39 +360,50 @@ const Navbar = () => {
                                         </div>
                                     </div>
 
-                                    {/* Dashboard Button */}
+                                    {/* Wallet Connect in Mobile Menu */}
                                     <motion.div
                                         className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800"
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: 0.7 }}
                                     >
+                                        <div className="mb-4 flex justify-center">
+                                            <WalletConnectButton isMobile={false} /> {/* Full-sized in the menu */}
+                                        </div>
+                                    </motion.div>
+
+                                    {/* Dashboard Button */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.8 }}
+                                    >
                                         <Link href="/dashboard" onClick={toggleMobileMenu}>
-                                            <Button className="w-full bg-gradient-to-r from-orange-500 to-yellow-400 hover:from-orange-600 hover:to-yellow-500 text-white">
+                                            <Button className="w-full bg-gradient-to-r from-violet-600 to-indigo-400 hover:from-violet-700 hover:to-indigo-500 text-white">
                                                 Go to Dashboard
                                             </Button>
                                         </Link>
                                     </motion.div>
-                                </div>
 
-                                {/* Contact Information */}
-                                <motion.div
-                                    className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800"
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.8 }}
-                                >
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                                        <p>Have questions? Contact us at:</p>
-                                        <p className="mt-1 font-medium text-gray-700 dark:text-gray-300">info@bitpayicp.com</p>
-                                    </div>
-                                </motion.div>
+                                    {/* Contact Information */}
+                                    <motion.div
+                                        className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.9 }}
+                                    >
+                                        <div className="text-sm text-gray-500 dark:text-gray-400">
+                                            <p>Have questions? Contact us at:</p>
+                                            <p className="mt-1 font-medium text-gray-700 dark:text-gray-300">info@bitpayicp.com</p>
+                                        </div>
+                                    </motion.div>
+                                </div>
                             </div>
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </IdentityKitProvider>
     );
 };
 

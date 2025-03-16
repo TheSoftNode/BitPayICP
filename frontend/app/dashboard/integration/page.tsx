@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Copy, Code, Globe, CreditCard, Terminal, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "@/components/Themes/ThemeToggle";
 
 export default function IntegrationPage() {
     const router = useRouter();
@@ -55,8 +56,8 @@ export default function IntegrationPage() {
         <div className="flex flex-col min-h-screen">
             <div className="flex-1 space-y-4 p-4 sm:p-6 md:p-8 pt-6">
                 {/* Header with back button */}
-                <div className="flex items-center gap-4 mb-6">
-                    <Button
+                <div className="flex items-center justify-between gap-4 mb-6">
+                    {/* <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => router.push("/dashboard")}
@@ -64,16 +65,17 @@ export default function IntegrationPage() {
                     >
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Back to Dashboard
-                    </Button>
-                    <Button
+                    </Button> */}
+                    {/* <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => router.push("/dashboard")}
                         className="sm:hidden"
                     >
                         <ArrowLeft className="h-4 w-4" />
-                    </Button>
+                    </Button> */}
                     <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Developer Integration</h2>
+                    <ThemeToggle />
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

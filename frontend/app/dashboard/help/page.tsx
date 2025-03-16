@@ -1,10 +1,10 @@
-// app/dashboard/help/page.tsx
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { HelpCircle, Book, MessagesSquare, FileQuestion, ExternalLink, FileText, Mail, AlertCircle } from "lucide-react";
+import ThemeToggle from "@/components/Themes/ThemeToggle";
 
 export default function HelpPage() {
     // Sample FAQs
@@ -39,6 +39,7 @@ export default function HelpPage() {
         <div className="flex-1 space-y-4 p-8 pt-6">
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Help & Support</h2>
+                <ThemeToggle />
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Download, Filter, Plus, Search, UserPlus } from "lucide-react";
+import ThemeToggle from "@/components/Themes/ThemeToggle";
 
 export default function CustomersPage() {
     // This is sample data that would typically come from a database
@@ -76,6 +77,7 @@ export default function CustomersPage() {
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Customers</h2>
                 <div className="flex items-center space-x-2">
+                    <ThemeToggle />
                     <Button variant="outline" size="sm">
                         <Download className="mr-2 h-4 w-4" />
                         Export
@@ -148,10 +150,10 @@ export default function CustomersPage() {
                                                 </td>
                                                 <td className="p-3 text-sm">
                                                     <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${customer.status === 'active' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
-                                                            'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
+                                                        'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400'
                                                         }`}>
                                                         <span className={`mr-1 h-1.5 w-1.5 rounded-full ${customer.status === 'active' ? 'bg-green-600 dark:bg-green-400' :
-                                                                'bg-gray-600 dark:bg-gray-400'
+                                                            'bg-gray-600 dark:bg-gray-400'
                                                             }`}></span>
                                                         <span className="capitalize">{customer.status}</span>
                                                     </span>
