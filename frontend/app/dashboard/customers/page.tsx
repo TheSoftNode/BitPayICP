@@ -74,10 +74,12 @@ export default function CustomersPage() {
 
     return (
         <div className="flex-1 space-y-4 p-8 pt-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center flex-wrap gap-3 justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Customers</h2>
                 <div className="flex items-center space-x-2">
-                    <ThemeToggle />
+                    <div className="hidden md:flex">
+                        <ThemeToggle />
+                    </div>
                     <Button variant="outline" size="sm">
                         <Download className="mr-2 h-4 w-4" />
                         Export

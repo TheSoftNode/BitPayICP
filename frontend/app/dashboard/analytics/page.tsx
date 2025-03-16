@@ -13,11 +13,13 @@ export default function AnalyticsPage() {
         <div className="flex-1 space-y-4 p-8 pt-6">
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Analytics</h2>
-                <ThemeToggle />
+                <div className="hidden md:flex">
+                    <ThemeToggle />
+                </div>
             </div>
 
             <Tabs defaultValue="trends" className="space-y-4">
-                <TabsList>
+                <TabsList className="h-full flex flex-wrap gap-3">
                     <TabsTrigger value="trends">Payment Trends</TabsTrigger>
                     <TabsTrigger value="conversion">Conversion Rates</TabsTrigger>
                     <TabsTrigger value="geography">Geography</TabsTrigger>

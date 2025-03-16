@@ -57,25 +57,11 @@ export default function IntegrationPage() {
             <div className="flex-1 space-y-4 p-4 sm:p-6 md:p-8 pt-6">
                 {/* Header with back button */}
                 <div className="flex items-center justify-between gap-4 mb-6">
-                    {/* <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => router.push("/dashboard")}
-                        className="hidden sm:flex"
-                    >
-                        <ArrowLeft className="mr-2 h-4 w-4" />
-                        Back to Dashboard
-                    </Button> */}
-                    {/* <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => router.push("/dashboard")}
-                        className="sm:hidden"
-                    >
-                        <ArrowLeft className="h-4 w-4" />
-                    </Button> */}
+
                     <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Developer Integration</h2>
-                    <ThemeToggle />
+                    <div className="hidden md:flex">
+                        <ThemeToggle />
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -198,7 +184,7 @@ export default function IntegrationPage() {
                         </CardHeader>
                         <CardContent>
                             <Tabs defaultValue="button">
-                                <TabsList className="w-full">
+                                <TabsList className="w-full h-full flex flex-wrap gap-2">
                                     <TabsTrigger value="button" className="flex-1">
                                         <CreditCard className="h-3.5 w-3.5 mr-1.5" />
                                         Payment Button
@@ -391,7 +377,7 @@ export default function IntegrationPage() {
                                 <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
                                 <p className="text-sm text-muted-foreground">All systems operational</p>
                             </div>
-                            <div className="space-x-3">
+                            <div className="space-x-3 flex">
                                 <Button variant="outline" size="sm">
                                     API Reference
                                 </Button>

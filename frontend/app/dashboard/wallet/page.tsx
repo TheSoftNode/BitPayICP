@@ -56,25 +56,11 @@ export default function WalletPage() {
             <div className="flex-1 space-y-4 p-4 sm:p-6 md:p-8 pt-6">
                 {/* Header with back button */}
                 <div className="flex items-center justify-between gap-4 mb-6">
-                    {/* <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => router.push("/dashboard")}
-                        className="hidden sm:flex"
-                    >
-                        <ArrowLeft className="mr-2 h-4 w-4" />
-                        Back to Dashboard
-                    </Button>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => router.push("/dashboard")}
-                        className="sm:hidden"
-                    >
-                        <ArrowLeft className="h-4 w-4" />
-                    </Button> */}
+
                     <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Wallet</h2>
-                    <ThemeToggle />
+                    <div className="hidden md:flex">
+                        <ThemeToggle />
+                    </div>
                 </div>
 
                 {/* Main content grid */}

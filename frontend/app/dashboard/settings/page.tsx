@@ -34,11 +34,13 @@ export default function SettingsPage() {
         <div className="flex-1 space-y-4 p-8 pt-6">
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Settings</h2>
-                <ThemeToggle />
+                <div className="hidden md:flex">
+                    <ThemeToggle />
+                </div>
             </div>
 
-            <Tabs defaultValue="profile" className="space-y-4">
-                <TabsList className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
+            <Tabs defaultValue="profile" className="space-y-4 mb-4">
+                <TabsList className="grid grid-cols-2 md:grid-cols-4 h-full lg:grid-cols-7 gap-y-3">
                     <TabsTrigger value="profile">
                         <UserCog className="h-4 w-4 mr-2" />
                         Profile

@@ -39,7 +39,9 @@ export default function HelpPage() {
         <div className="flex-1 space-y-4 p-8 pt-6">
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Help & Support</h2>
-                <ThemeToggle />
+                <div className="hidden md:flex">
+                    <ThemeToggle />
+                </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -93,7 +95,7 @@ export default function HelpPage() {
             </div>
 
             <Tabs defaultValue="faq" className="space-y-4">
-                <TabsList>
+                <TabsList className="flex h-full flex-wrap gap-2">
                     <TabsTrigger value="faq">
                         <HelpCircle className="h-4 w-4 mr-2" />
                         FAQ

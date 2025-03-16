@@ -50,7 +50,7 @@ export default function DashboardLayout({
     return (
         <div className="min-h-screen flex flex-col md:flex-row bg-gray-50 dark:bg-gray-950">
             {/* Mobile Header */}
-            <div className="md:hidden bg-white dark:bg-gray-900 flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-800">
+            <div className="md:hidden bg-white dark:bg-gray-900 flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-[51]">
                 <Link href="/" className="flex items-center space-x-2">
                     <div className="relative h-6 w-6">
                         <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-yellow-400 rounded-full transform rotate-12"></div>
@@ -106,7 +106,6 @@ export default function DashboardLayout({
                 </div>
             )}
 
-            {/* Sidebar (Desktop) - Now with height: fit-content instead of flex-1 */}
             <div className="md:flex flex-col">
                 <aside className="hidden md:block w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 h-fit sticky top-0">
                     <div className="p-4">
