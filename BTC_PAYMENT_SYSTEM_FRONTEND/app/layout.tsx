@@ -2,11 +2,9 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import "@nfid/identitykit/react/styles.css"
 
-import { IdentityKitProvider } from "@nfid/identitykit/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +34,6 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
-
         </ThemeProvider>
       </body>
     </html>
